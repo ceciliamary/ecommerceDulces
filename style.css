@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.barraNav{
+    background-color: aqua;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.elementoNav{
+    background-color: salmon;
+    color:antiquewhite;
+    padding: 10px 30px;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.elementoNav:hover{
+    background: blueviolet;
+}
+
+.tituloPrincipal{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font: weight 400;
+    font-size: 30px;   
+    text-align: center;
+    padding: 15px;
+}
+
+.cuerpoPrincipal{
+    background-color: darkgrey;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;   
+}
+
+.prod-img{
+    width: 320px;
+    height: 340px;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+
+.contenedorProductos{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+*/
+.divProductos{
+display: flex;
+
+flex-wrap:wrap;
+}
+
+.producto-nombre{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 5px;
+    padding: 5px;
+}
+
+.producto-cantidad{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 0px;
+    padding: 5px;
+}
+
+.producto-precio{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 0px;
+    padding: 5px;
+}
+
+.formularioHaceTuPedido{
+    border: "solid: 3px "blue"";
+    width: fit-content;
+    background-color: aqua;
+}
+
+/*BOTONES*/
+
+.btn-compra{
+background-color: aquamarine;
+font-family: 'Times New Roman', Times, serif;
+font-size: 15px;
+border-radius: 20px;
+padding: 5px;
+}
+
+.btnFormulario{
+
+}
