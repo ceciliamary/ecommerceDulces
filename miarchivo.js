@@ -1,6 +1,6 @@
-const divProductos = document.getElementById ("productos");
+let productosDisponibles = JSON.parse(localStorage.getItem("productos")) || [];
 
-let productosDisponibles = JSON.parse(localStorage.getItem("productos"));
+const divProductos = document.getElementById ("productos");
 
 const formularioHaceTuPedido = document.getElementById('formularioHaceTuPedido');
 
@@ -18,7 +18,7 @@ const generarCardProductos = (productos) => {
 
   productos.forEach(producto => {
 
-    const {img, nombre, cantidad, precio, id} = producto
+    const {img, nombre, cantidad, precio, categoria, id} = producto
     let card = document.createElement("div")
     card.className = "producto"
     card.innerHTML = `
@@ -27,7 +27,10 @@ const generarCardProductos = (productos) => {
     <div class="card-body">
     <h5 class="producto-nombre">${nombre}</h5>
     <p class="producto-cantidad">${cantidad}</p>
+    <p class="producto-categoria">${categoria}</p>
     <p class="card-text">$${precio}</p>
+    
+
     <button id="comprar${id}" class="btn-compra">COMPRAR</button>
     </div>
     </div>
@@ -39,10 +42,9 @@ const generarCardProductos = (productos) => {
   });
   };
   
-// carrito
+// Carrito
 
-
-let carrito = JSON.parse(sessionStorage.getItem("carrito"))
+let carrito = JSON.parse(sessionStorage.getItem("carrito")) || []
 
 const comprarProducto = (idProducto) => {
 
@@ -73,14 +75,34 @@ const comprarProducto = (idProducto) => {
     }
     carrito = JSON.parse(sessionStorage.getItem("carrito"))
 
-    alert(`Usted ha comprado: ${nombre}`)
+    /*alert(`Usted ha comprado: ${nombre}`)*/
+    alert(Swal.fire("Usted ha comprado: `${nombre}`"));
     console.log(carrito)
 }
 
 //BUSCAR UN PRODUCTO
-/*
+
+let btnBuscarProducto = document.getElementById("btnBuscarProducto");
+
+btnBuscarProducto.addEventListener("click", () => {
+  Swal.fire({
+    title: "Ingrese el nombre del Producto a buscar",
+    input: "text",
+    showCancelButton: true,
+    ConfirmButtonText: "Look up",
+  }).then((result) => {
+  if(result.isConfirmed){
+    let encontrado = productos.find((producto) => producto.nombre === nombre && producto.precio === precio);
+    Swal.fire({
+        title: `${result.value}`,
+    });
+    } 
+    });
+  });
+  
+/*const buscarProducto = () => { 
 let nombre = prompt("Ingrese el nombre del producto a buscar");
-while( nombre !="salir"){
+while( nombre !="ESC"){
   let encontrado = productos.find((producto) => producto.nombre === nombre);
   if(encontrado){
     alert(`Nombre: ${encontrado.nombre}
@@ -90,13 +112,16 @@ while( nombre !="salir"){
   }else{
 alert("Producto no disponible");
     }
-    nombre = prompt("Ingrese el nombre del producto a buscar");
+  nombre = prompt("Ingrese el nombre del producto a buscar");
   }
+};
 
-
+btnBuscarProducto.addEventListener("click", buscarProducto);
 */
 
-//FORMULARIO PEDIDOS
+
+
+//FORMULARIO PEDIDOS Una vez que confirma la compra, se solicita que cargue sus datos en el formulario, y termine con un ENVIADO
 
 class Pedido {
   constructor(nombreCliente, apellidoCliente, numeroPedido) {
@@ -109,7 +134,8 @@ class Pedido {
 const pedidos = [];
 
 /*****************************/
-//Si el LocalStorage tiene datos, los agrego al Array de Reservas.
+//Si el LocalStorage tiene datos, los agrego al Array de Pedidos.
+
 if (localStorage.getItem('pedido')) {
   let pedido = JSON.parse(localStorage.getItem('pedidos'));
   
@@ -134,7 +160,9 @@ function agregarPedido() {
 
   const nuevoPedido = new Pedido(nombre, apellido, pedido);
   pedidos.push(nuevoPedido);
+
   //Agrego al LocalStorage:
+  
   localStorage.setItem('pedidos', JSON.stringify(pedidos));
   formulario.reset();
 }

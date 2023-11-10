@@ -5,7 +5,7 @@ const productos = [
     img: "https://imag.bonviveur.com/mermelada-de-frambuesa.webp",
     precio: 1100, 
     cantidad: "500grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo"
+    categoria: "Dulces"
  },
  {
    id: 2,
@@ -13,7 +13,7 @@ const productos = [
     img: "https://clarin.com/img//2020/10/21/jT15zokHL_1256x620__2.jpg#1603317684387",
     precio: 1200, 
     cantidad: "500grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo"
+    categoria: "Dulces"
  },
  {
    id: 3,
@@ -21,7 +21,7 @@ const productos = [
     img: "https://www.receteca.com/imagenes/recetas/1767.jpg",
     precio: 900,
     cantidad: "500grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo"
+    categoria: "Dulces"
  },
  {
    id: 4, 
@@ -29,7 +29,7 @@ const productos = [
     img: "https://www.interpatagonia.com/recetas/dulcedesauco/dulce-sauco.jpg",
     precio: 800,
     cantidad: "500grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo"
+    categoria: "Dulces"
  },
  {
    id: 5, 
@@ -37,7 +37,7 @@ const productos = [
     img: "https://1.bp.blogspot.com/-z569RLPOozM/XhJvW7KtvRI/AAAAAAAAHi8/BR41mK32vUEuCtgYbB1e4tXXDZlPPtG2wCNcBGAsYHQ/s1600/IMG_4245ed.JPG",
     precio: 1100, 
     cantidad: "500grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo" 
+    categoria: "Dulces"
  },
  {
    id: 6,
@@ -45,7 +45,7 @@ const productos = [
     nombre: "Dulce de Zapallo",
     precio: 1100, 
     cantidad: "500grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo"
+    categoria: "Dulces"
  },
  {
    id: 7, 
@@ -53,8 +53,24 @@ const productos = [
     img: "https://media-cdn.tripadvisor.com/media/photo-s/11/55/ab/de/conservas-de-frambuesas.jpg",
     precio: 1500,
     cantidad: "800grs.",
-    Descripcion: "gogogogoggogogogogogogogogogoggogo"
- }  
+    categoria: "Dulces"
+ },
+ {
+   id: 8, 
+   nombre: "Berenjenas al Escaveche",
+   img: "https://cdn0.recetasgratis.net/es/posts/2/5/3/berenjenas_en_vinagreta_picantes_14352_600.webp",
+   precio: 2500,
+   cantidad: "1000grs.",
+   categoria: "Conservas"
+ },
+ {    
+   id: 9, 
+   nombre: "Morrones Agridulces",
+   img: "https://i.pinimg.com/736x/fa/d4/5d/fad45d09e9f07bc035dac38b8c0fff44.jpg",
+   precio: 2200,
+   cantidad: "1200grs.",
+   categoria: "Conservas"
+ }, 
  ];
 
  
