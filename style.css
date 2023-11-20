@@ -101,6 +101,11 @@ padding: 5px;
 
 /* carrito*/
 
+.carrito{
+    border: "solid: 3px "blue"";
+    width: fit-content;
+    background-color: salmon;
+}
 .fotoProductoCarrito{
     width: 30%;
     height: 30%;

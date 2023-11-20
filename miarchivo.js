@@ -145,8 +145,6 @@ function seguirComprando(){
     })
   }
 
-
-
 const dibujarCarrito = () => {
   carrito.forEach(producto =>{
     const {img, nombre, cantidad, precio, id} = producto
@@ -158,9 +156,9 @@ body.innerHTML = `
 <th><img id="fotoProductoCarrito" src= "${img}"
 class="fotoProductoCarrito"</th>
 <td>${nombre}</td>
-<td>${cantidad}</td>
-<td>${precio/cantidad}</td>
-<td>${precio}</td>
+<td>"${cantidad}"</td>
+<td>"${precio/cantidad}"</td>
+<td>"${precio}"</td>
 <td>
 <button id="+${id}">+</button>
 <button id="-${id}">-</button>
@@ -232,52 +230,6 @@ const restarCantidad = (id) => {
   dibujarCarrito()
 
 }
-
-/*
-
-  const continuarComprando = prompt("Desea seguir comprando? \n 1. Si \n 2. No")
-  if(continuarComprando == 1){
-    comprarProducto()
-  } else{
-    if (carrito.length > 0){
-        totalCarrito()
-    } else{
-        alert("No hay productos en el carrito")
-    }
-  }
-  }
-*/
-
-  /*let confirmacion = prompt("Desea agregarlo al carrito? \n 1. Si \n 2. No")
-  if (confirmacion === "1"){
-      carrito.push (encontrado)
-      alert("Producto agregado al carrito")
-      seguirComprando()
-  } else {
-      alert("Producto no agregado al carrito")
-  }
-
-function seguirComprando(){
-const continuarComprando = prompt("Desea seguir comprando? \n 1. Si \n 2. No")
-if(continuarComprando == 1){
-  comprarProducto()
-} else{
-  if (carrito.length > 0){
-      totalCarrito()
-  } else{
-      alert("No hay productos en el carrito")
-  }
-}
-}
-
-function totalCarrito(){
-let precioTotal = carrito.reduce((acumulador, producto) => {
-  return acumulador + producto.precio
-},0)
-alert(`El precio total es de $ ${precioTotal}`)
-}
-*/
-
 
 //BUSCAR UN PRODUCTO
 
