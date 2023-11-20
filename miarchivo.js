@@ -42,15 +42,37 @@ const generarCardProductos = (productos) => {
   });
   };
   
+
 // Carrito
 
+document.addEventListener("DOMContentLoaded", () => {
+  dibujarCarrito()
+})
+
 let carrito = JSON.parse(sessionStorage.getItem("carrito")) || []
+
+const listaCarrito = document.getElementById("items")
+
+const footCarrito = document.getElementById("totales")
+
+const btnVerCarritoCompras = document.getElementById("btnVerCarritoCompras")
+
+const carritoTable = document.getElementById("carrito")
+
+btnVerCarritoCompras.addEventListener("click", () => {
+  dibujarCarrito()
+  if(carritoTable.style.display === "block"){
+    carritoTable.style.display = "none"
+  } else{
+    carritoTable.style.display = "block"
+  }
+})
 
 const comprarProducto = (idProducto) => {
 
     const producto = productosDisponibles.find((producto) => producto.id === idProducto)
 
-    const { nombre, precio, imagen, id } = producto
+    const { nombre, precio, imagen, id, cantidad } = producto
 
     const productoCarrito = carrito.find((producto) => producto.id === idProducto)
 
@@ -75,10 +97,187 @@ const comprarProducto = (idProducto) => {
     }
     carrito = JSON.parse(sessionStorage.getItem("carrito"))
 
-    /*alert(`Usted ha comprado: ${nombre}`)*/
-    alert(Swal.fire("Usted ha comprado: `${nombre}`"));
-    console.log(carrito)
+  Swal.fire({
+    title: 'Desea agregarlo al carrito?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    denyButtonText: 'No',
+    customClass: {
+      actions: 'my-actions',
+      cancelButton: 'order-1 right-gap',
+      confirmButton: 'order-2',
+      denyButton: 'order-3',
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      carrito.push(producto)
+      Swal.fire('Producto agregado al carrito!', '', 'success')
+      
+    } else if (result.isDenied) {
+      Swal.fire('Producto no agregado', '', 'info')
+    }
+  })
 }
+
+function seguirComprando(){
+  Swal.fire({
+    title: 'Desea seguir comprando?',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    denyButtonText: 'No',
+    customClass: {
+      actions: 'my-actions',
+      cancelButton: 'order-1 right-gap',
+      confirmButton: 'order-2',
+      denyButton: 'order-3',
+    },
+  }).then((result) => {
+    if (result.isConfirmed) {
+      comprarProducto()
+    } else
+      if (carrito.length > 0){
+          totalCarrito()
+      } else if (result.isDenied) {
+        Swal.fire('Producto no agregado', '', 'info')
+      }
+    })
+  }
+
+
+
+const dibujarCarrito = () => {
+  carrito.forEach(producto =>{
+    const {img, nombre, cantidad, precio, id} = producto
+
+  let body = document.createElement("tr")
+
+body.className = "producto === carrito"
+body.innerHTML = `
+<th><img id="fotoProductoCarrito" src= "${img}"
+class="fotoProductoCarrito"</th>
+<td>${nombre}</td>
+<td>${cantidad}</td>
+<td>${precio/cantidad}</td>
+<td>${precio}</td>
+<td>
+<button id="+${id}">+</button>
+<button id="-${id}">-</button>
+</td>
+`
+
+listaCarrito.append(body)
+const btnAgregar = document.getElementById(`+${id}`)
+const btnRestar = document.getElementById(`-${id}`)
+
+btnAgregar.addEventListener("click", () => console.log(id))
+btnRestar.addEventListener("click", () => console.log(id))
+ });
+
+dibujarFooter()
+}
+
+const dibujarFooter = () =>{
+  if(carrito.length >0){
+    footCarrito.innerHTML = ""
+    let footer = document.createElement("tr")
+
+    footer.innerHTML = `
+    <th><b>Totales:</th>
+    <td></td>
+    <td>${generarTotales().cantidadTotal}</td>
+    <td></td>
+    <td>${generarTotales().costoTotal}</td>
+    `
+    footCarrito.append(footer)
+  }else{
+    footCarrito.innerHTML = "<h3>No hay productos en el carrito</h3>"
+  }
+}
+
+const generarTotales = () =>{
+  const costoTotal = carrito.reduce((acumulador, {precio}) => total + precio, 0)
+  const cantidadTotal = carrito.reduce((total, {cantidad})=>
+  total + cantidad, 0)
+  return {
+    costoTotal: costoTotal, 
+    cantidadTotal: cantidadTotal
+  }
+}
+const aumentarCantidad = (id) => {
+  const indexProductoCarrito = carrito.findIndex((producto) => producto.id === id)
+  const precio = carrito[indexProductoCarrito].precio / carrito[indexProductoCarrito].cantidad
+
+  carrito[indexProductoCarrito].cantidad++
+  carrito[indexProductoCarrito].precio = precio*carrito[indexProductoCarrito].cantidad
+
+  sessionStorage.setItem("carrito", JSON.stringify(carrito))
+  dibujarCarrito()
+
+}
+
+const restarCantidad = (id) => {
+  const indexProductoCarrito = carrito.findIndex((producto) => producto.id === id)
+  const precio = carrito[indexProductoCarrito].precio / carrito[indexProductoCarrito].cantidad
+
+  carrito[indexProductoCarrito].cantidad--
+  carrito[indexProductoCarrito].precio = precio*carrito[indexProductoCarrito].cantidad
+
+  if(carrito[indexProductoCarrito].cantidad === 0){
+      carrito.splice(indexProductoCarrito, 1)
+  }
+
+  sessionStorage.setItem("carrito", JSON.stringify(carrito))
+  dibujarCarrito()
+
+}
+
+/*
+
+  const continuarComprando = prompt("Desea seguir comprando? \n 1. Si \n 2. No")
+  if(continuarComprando == 1){
+    comprarProducto()
+  } else{
+    if (carrito.length > 0){
+        totalCarrito()
+    } else{
+        alert("No hay productos en el carrito")
+    }
+  }
+  }
+*/
+
+  /*let confirmacion = prompt("Desea agregarlo al carrito? \n 1. Si \n 2. No")
+  if (confirmacion === "1"){
+      carrito.push (encontrado)
+      alert("Producto agregado al carrito")
+      seguirComprando()
+  } else {
+      alert("Producto no agregado al carrito")
+  }
+
+function seguirComprando(){
+const continuarComprando = prompt("Desea seguir comprando? \n 1. Si \n 2. No")
+if(continuarComprando == 1){
+  comprarProducto()
+} else{
+  if (carrito.length > 0){
+      totalCarrito()
+  } else{
+      alert("No hay productos en el carrito")
+  }
+}
+}
+
+function totalCarrito(){
+let precioTotal = carrito.reduce((acumulador, producto) => {
+  return acumulador + producto.precio
+},0)
+alert(`El precio total es de $ ${precioTotal}`)
+}
+*/
+
 
 //BUSCAR UN PRODUCTO
 
@@ -92,34 +291,27 @@ btnBuscarProducto.addEventListener("click", () => {
     ConfirmButtonText: "Look up",
   }).then((result) => {
   if(result.isConfirmed){
-    let encontrado = productos.find((producto) => producto.nombre === nombre && producto.precio === precio);
+
+  let encontrado = productos.find((producto) => producto.nombre === result.value);  
+   if(encontrado) {
     Swal.fire({
-        title: `${result.value}`,
-    });
-    } 
-    });
-  });
-  
-/*const buscarProducto = () => { 
-let nombre = prompt("Ingrese el nombre del producto a buscar");
-while( nombre !="ESC"){
-  let encontrado = productos.find((producto) => producto.nombre === nombre);
-  if(encontrado){
-    alert(`Nombre: ${encontrado.nombre}
-    Cantidad: ${encontrado.cantidad}
-    Precio: $${encontrado.precio}
-    `);
-  }else{
-alert("Producto no disponible");
+      title: `Detalles del producto`,
+      html: `
+      Nombre: ${encontrado.nombre}
+      Precio: $${encontrado.precio}
+      Cantidad: ${encontrado.cantidad}
+      Categoria: ${encontrado.categoria}
+      `,
+      });
+    } else {
+      Swal.fire({
+        title: `Producto no encontrado`,
+        icon: `error`,
+        });  
     }
-  nombre = prompt("Ingrese el nombre del producto a buscar");
   }
-};
-
-btnBuscarProducto.addEventListener("click", buscarProducto);
-*/
-
-
+})
+}) 
 
 //FORMULARIO PEDIDOS Una vez que confirma la compra, se solicita que cargue sus datos en el formulario, y termine con un ENVIADO
 
@@ -189,5 +381,3 @@ function mostrarPedidos() {
     contenedorPedidos.appendChild(div);
   });
 }
-
-
