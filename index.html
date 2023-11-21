@@ -10,19 +10,12 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body class="cuerpoPrincipal">
-    <header>
-        <nav class="barraNav">
-            <button id="btnBuscarProducto">Buscar un Producto</button>
-            <button id="btnBuscarPorCategoria">Buscar por categoria</button>
-            <!-- <button id="btnVerCarritoCompras" class="btnVerCarritoCompras">Ver carrito de Compras</button> -->
-        </nav>
-    </header>
-<h1 class="tituloPrincipal">DULCES ARTESANALES</h1>
-<div id="productos" class="contenedorProductos"></div>
-<br>
-<br>
-<div id="productos"></div>
+<header class="cabecera">
+<div>
+<button id="btnBuscarProducto">Buscar un Producto</button>
+</div>
 <div id="btnVerCarritoCompras"><button class="btnVerCarritoCompras">Ver Carrito de Compras</button></div>
+
 <div id="carrito" class="carrito"> 
     <table>
         <thead>
@@ -39,6 +32,14 @@
         <tfoot id="totales"></tfoot>
     </table>
 </div>
+</header>
+
+<h1 class="tituloPrincipal">DULCES ARTESANALES</h1>
+<div id="productos" class="contenedorProductos"></div>
+<br>
+<br>
+<div id="productos"></div>
+
 <div class="formularioHaceTuPedido">
     <h2>Completa el formulario</h2>
 <form id="formulario">
@@ -57,6 +58,7 @@
     <button>Confirmar Pedido</button>
   </form>
 </div>
+
   <h2>Ver Pedidos Vigentes:</h2>
   <br /><br />
   <button id="verPedidos">VER PEDIDOS</button>

@@ -153,8 +153,7 @@ const dibujarCarrito = () => {
 
 body.className = "producto === carrito"
 body.innerHTML = `
-<th><img id="fotoProductoCarrito" src= "${img}"
-class="fotoProductoCarrito"</th>
+<th><img id="fotoProductoCarrito" src= "${img}" class="fotoProductoCarrito"</th>
 <td>${nombre}</td>
 <td>"${cantidad}"</td>
 <td>"${precio/cantidad}"</td>
@@ -264,6 +263,7 @@ btnBuscarProducto.addEventListener("click", () => {
   }
 })
 }) 
+
 
 //FORMULARIO PEDIDOS Una vez que confirma la compra, se solicita que cargue sus datos en el formulario, y termine con un ENVIADO
 

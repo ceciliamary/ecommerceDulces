@@ -3,23 +3,9 @@
     padding: 0;
 }
 
-.barraNav{
-    background-color: aqua;
-    padding: 10px;
+.cabecera{
     display: flex;
-    justify-content: space-around;
-}
-
-.elementoNav{
-    background-color: salmon;
-    color:antiquewhite;
-    padding: 10px 30px;
-    display: inline-block;
-    text-decoration: none;
-}
-
-.elementoNav:hover{
-    background: blueviolet;
+    flex: center;
 }
 
 .tituloPrincipal{
@@ -54,7 +40,6 @@
 
 .divProductos{
 display: flex;
-
 flex-wrap:wrap;
 }
 
@@ -95,9 +80,6 @@ border-radius: 20px;
 padding: 5px;
 }
 
-.btnFormulario{
-
-}
 
 /* carrito*/
 
