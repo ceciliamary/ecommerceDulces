@@ -6,6 +6,7 @@
 .cabecera{
     display: flex;
     flex: center;
+    
 }
 
 .tituloPrincipal{
@@ -92,15 +93,3 @@ padding: 5px;
     width: 30%;
     height: 30%;
 }
-/*
-.btnVerCarritoCompras{
-    display: none;
-    position: fixed;
-    top: 10%;
-    right: 10%;
-    width: 30%;
-    height: auto;
-    background-color: whitesmoke;
-    z-index: 1001;
-}
-*/
