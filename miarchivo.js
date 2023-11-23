@@ -85,15 +85,14 @@ const comprarProducto = (idProducto) => {
             imagen: imagen,
             cantidad: 1
         }
-    //carrito.push(nuevoProductoCarrito)
-    
-    sessionStorage.setItem("carrito", JSON.stringify(carrito) )
+  
+    sessionStorage.setItem("carrito", JSON.stringify(carrito))  
     }else{
         const indexProductoCarrito = carrito.findIndex((producto) => producto.id === idProducto)
 
         carrito[indexProductoCarrito].cantidad++
         carrito[indexProductoCarrito].precio = precio * carrito[indexProductoCarrito].cantidad
-
+         
         sessionStorage.setItem("carrito", JSON.stringify(carrito))
     }
     carrito = JSON.parse(sessionStorage.getItem("carrito"))
@@ -215,6 +214,7 @@ const aumentarCantidad = (id) => {
   carrito[indexProductoCarrito].cantidad++
   carrito[indexProductoCarrito].precio = precio*carrito[indexProductoCarrito].cantidad
 
+  
   sessionStorage.setItem("carrito", JSON.stringify(carrito))
  dibujarCarrito()
 
@@ -231,6 +231,7 @@ const restarCantidad = (id) => {
       carrito.splice(indexProductoCarrito, 1)
   }
 
+  
   sessionStorage.setItem("carrito", JSON.stringify(carrito))
   dibujarCarrito()
 
@@ -286,9 +287,6 @@ class Pedido {
 
 const pedidos = [];
 
-/*****************************/
-//Si el LocalStorage tiene datos, los agrego al Array de Pedidos.
-
 if (localStorage.getItem('pedido')) {
   let pedido = JSON.parse(localStorage.getItem('pedidos'));
   
@@ -297,7 +295,6 @@ if (localStorage.getItem('pedido')) {
   }
 }
 
-/*****************************/
 
 const formulario = document.getElementById('formulario');
 
@@ -310,15 +307,14 @@ function agregarPedido() {
   const nombre = document.getElementById('nombre').value;
   const apellido = document.getElementById('apellido').value;
   const pedido = document.getElementById('pedido').value;
-
   const nuevoPedido = new Pedido(nombre, apellido, pedido);
   pedidos.push(nuevoPedido);
 
-  //Agrego al LocalStorage:
   
   localStorage.setItem('pedidos', JSON.stringify(pedidos));
   formulario.reset();
 }
+
 
 const contenedorPedidos = document.getElementById('contenedorPedidos');
 
@@ -342,3 +338,12 @@ function mostrarPedidos() {
     contenedorPedidos.appendChild(div);
   });
 }
+
+const listado = document.getElementById("listado");
+fetch("./data.json")
+.then((response)=>response.json())
+.then((data)=>{
+  console.log(data);
+})
+
+
