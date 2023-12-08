@@ -18,7 +18,7 @@ const productos = [
  {
    id: 3,
     nombre: "Dulce de Rosa Mosqueta",
-    img: "https://www.receteca.com/imagenes/recetas/1767.jpg",
+    img: "https://comidaschilenas.com/wp-content/uploads/2019/07/Receta-de-mermelada-de-mosqueta.jpg",
     precio: 900,
     cantidad: "500grs.",
     categoria: "Dulces"
